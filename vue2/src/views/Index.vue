@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import MapContainer from '@/components/MapContainer.vue'
+import MapContainer from '@/components/MapContainer/MapContainer.vue'
 export default {
   components: { MapContainer },
 

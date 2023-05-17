@@ -8,7 +8,7 @@
 import BinaryTree from './components/BinaryTree/BinaryTree.vue';
 
 export default {
-  name: 'App',
+  name: 'tree',
   components: {
     'binary-tree': BinaryTree
   },

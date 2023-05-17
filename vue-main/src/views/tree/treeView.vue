@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg ref="svg" :viewBox="[0,0,0,0]"></svg>
+    <svg ref="svg" :viewBox="[0, -50, 1000, 2000]"></svg>
   </div>
 </template>
 
@@ -10,10 +10,6 @@ import * as d3 from 'd3';
 export default {
   name: 'BinaryTree',
   props: {
-    data: {
-      type: Object,
-      required: true
-    },
     width: {
       type: Number,
       default: 400
@@ -23,12 +19,45 @@ export default {
       default: 400
     }
   },
+  data(){
+    return{
+    // 存储树节点
+     Data: {
+        name: 'A',
+        children: [
+          {
+            name: 'B',
+            children: [
+              {
+                name: 'D'
+              },
+              {
+                name: 'E'
+              }
+            ]
+          },
+          {
+            name: 'C',
+            children: [
+              {
+                name: 'F'
+              },
+              {
+                name: 'G'
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
   mounted() {
     this.drawTree();
   },
   methods: {
     drawTree() {
-      const treeData = d3.hierarchy(this.data);
+      // 接收response数据,并赋值给Data
+      const treeData = d3.hierarchy(this.Data);
       const treeLayout = d3.tree().size([this.width, this.height]);
       const nodes = treeLayout(treeData).descendants();
       const links = treeLayout(treeData).links();
@@ -78,7 +107,7 @@ export default {
 
 <style>
 svg {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border: 1px solid rgb(250, 245, 245);
 }
 </style>

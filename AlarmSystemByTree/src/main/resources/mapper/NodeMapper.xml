@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hy.mapper.NodeMapper">
+    <!--id表示接口当中定义的方法. resultType,表示数据库查询的结果.-->
+    <select id="list" resultType="com.hy.entity.Node">
+        select * from node;
+    </select>
+    <!--    设置主键回填-->
+    <update id="update" parameterType="com.hy.entity.Node">
+        update node set node_name=#{node_name},fault_info=#{fault_info},latitude=#{latitude},longitude=#{longitude},current=#{current},electric_field=#{electric_field},temperature=#{temperature},humidity=#{humidity},battery_voltage=#{battery_voltage},solar_voltage=#{solar_voltage} where node_id=#{node_id};
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from node where node_id=#{node_id};
+    </delete>
+
+    <insert id="insert" parameterType="com.hy.entity.Node" useGeneratedKeys="true" keyProperty="node_id">
+        insert into node values (#{node_id},#{node_name},#{fault_info},#{latitude},#{longitude},#{current},#{electric_field},#{temperature},#{humidity},#{battery_voltage},#{solar_voltage},#{create_time});
+    </insert>
+
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.hy.entity.Node">
+        select * from node where node_name=#{node_name};
+    </select>
+
+    <select id="selectByFault" parameterType="java.lang.String" resultType="com.hy.entity.Node">
+        select * from node where fault_info=#{fault_info}
+    </select>
+</mapper>

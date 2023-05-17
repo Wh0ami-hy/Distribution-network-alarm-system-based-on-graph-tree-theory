@@ -94,12 +94,12 @@ export const constantRoutes = [
     children: [
       {
         path: 'tree',
-        component: () => import('@/views/tree/BinaryTree'),
+        component: () => import('@/views/tree/treeView'),
         meta: {title: '二叉树系统', icon: 'table'}
       },
       {
         path: 'map',
-        component: () => import('@/views/map/map'),
+        component: () => import('@/views/map/mapView'),
         meta: {title: '实景地图系统', icon: 'table'}
       }
     ]

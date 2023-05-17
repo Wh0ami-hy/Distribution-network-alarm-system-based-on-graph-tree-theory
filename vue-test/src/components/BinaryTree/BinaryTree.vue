@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     drawTree() {
+      // 
       const treeData = d3.hierarchy(this.data);
       const treeLayout = d3.tree().size([this.width, this.height]);
       const nodes = treeLayout(treeData).descendants();

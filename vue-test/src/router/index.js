@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '@/views/Index'
+import treeView from '@/views/tree/treeView'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    component: Index
+    path: '/treeView',
+    component: treeView
   }
 ]
 

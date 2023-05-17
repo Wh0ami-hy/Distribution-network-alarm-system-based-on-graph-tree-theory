@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import treeView from '@/views/tree/treeView'
+import mapView from '@/views/map/mapView'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/treeView',
-    component: treeView
+    path: '/view',
+    component: mapView
   }
 ]
 

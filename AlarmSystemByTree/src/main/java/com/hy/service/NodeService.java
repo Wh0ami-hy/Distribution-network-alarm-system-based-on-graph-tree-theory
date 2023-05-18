@@ -2,6 +2,7 @@ package com.hy.service;
 
 import com.hy.entity.Node;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface NodeService {
@@ -18,8 +19,8 @@ public interface NodeService {
 
     public List<Node> selectByFault(String fault_info);
 
-    public void createTree(List<Node> list);
+    public List<Node> createTree();
 
-    public void createMap(List<Node> list);
+    public List<Node> createMap();
 
 }

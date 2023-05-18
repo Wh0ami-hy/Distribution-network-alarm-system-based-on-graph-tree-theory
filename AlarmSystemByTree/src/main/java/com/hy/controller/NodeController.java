@@ -7,8 +7,10 @@ import com.hy.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -63,6 +65,41 @@ public class NodeController {
             nodes = nodeService.selectByFault(content);
         }
         return Result.ok().data("data",nodes);
+    }
+    @GetMapping("/createMap")
+    public Result createMap(){
+
+        List result = new ArrayList();
+
+        List<Node> nodes = nodeService.createMap();
+        for(Node node : nodes){
+            if (node.getFault_info().equals("正常") || node.getFault_info() == null || node.getFault_info().equals("")){
+                JSONObject json_string1 = JSONObject.parseObject("{ center: [" + node.getLatitude() + "," + node.getLongitude() + "], fillColor: '#22dc19' }");
+                result.add(json_string1);
+                //System.out.println("{ center: [" + node.getLatitude() + "," + node.getLongitude() + "], fillColor: '#22dc19' },");
+            }else {
+                JSONObject json_string2 = JSONObject.parseObject("{ center: [" + node.getLatitude() + "," + node.getLongitude() + "], fillColor: '#c80539' }");
+                result.add(json_string2);
+                //System.out.println("{ center: [" + node.getLatitude() + "," + node.getLongitude() + "], fillColor: '#c80539' },");
+            }
+        }
+        System.out.println(result);
+
+        return Result.ok().data("data", result);
+    }
+    @GetMapping("/createTree")
+    public Result createTree(){
+        List result = new ArrayList();
+        List<Node> nodes = nodeService.createTree();
+        for(Node node : nodes){
+            if (node.getFault_info().equals("正常") || node.getFault_info() == null || node.getFault_info().equals("")){
+
+            }else {
+                result.add(node.getNode_id());
+            }
+        }
+        System.out.println(result);
+        return Result.ok().data("data", result);
     }
 
 }

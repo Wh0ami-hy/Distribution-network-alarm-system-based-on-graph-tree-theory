@@ -37,3 +37,17 @@ export function selected(data) {
     data
   })
 }
+
+export function createMap() {
+  return request({
+    url: '/node/createMap',
+    method: 'get',
+  })
+}
+
+export function createTree() {
+  return request({
+    url: '/node/createTree',
+    method: 'get',
+  })
+}

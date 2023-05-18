@@ -3,6 +3,7 @@ package com.hy.mapper;
 import com.hy.entity.Node;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
@@ -19,7 +20,7 @@ public interface NodeMapper {
 
     public List<Node> selectByFault(String fault_info);
 
-    public void createTree(List<Node> list);
+    public List<Node> createTree();
 
-    public void createMap(List<Node> list);
+    public List<Node> createMap();
 }

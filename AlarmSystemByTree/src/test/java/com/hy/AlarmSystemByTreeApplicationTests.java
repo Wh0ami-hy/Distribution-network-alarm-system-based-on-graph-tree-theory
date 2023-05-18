@@ -8,6 +8,7 @@ class AlarmSystemByTreeApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

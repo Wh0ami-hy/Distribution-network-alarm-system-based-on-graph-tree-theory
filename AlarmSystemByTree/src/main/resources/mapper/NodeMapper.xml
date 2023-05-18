@@ -26,4 +26,14 @@
     <select id="selectByFault" parameterType="java.lang.String" resultType="com.hy.entity.Node">
         select * from node where fault_info=#{fault_info}
     </select>
+
+    <select id="createMap" resultType="com.hy.entity.Node">
+        select fault_info,latitude,longitude from node
+    </select>
+
+    <select id="createTree" resultType="com.hy.entity.Node">
+        select node_id,fault_info from node
+    </select>
+
+
 </mapper>

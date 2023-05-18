@@ -30,7 +30,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="纬度"
+        label="经度"
         width=""
         align="center">
           <template slot-scope="scope">
@@ -38,7 +38,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="经度"
+        label="纬度"
         width=""
         align="center">
           <template slot-scope="scope">

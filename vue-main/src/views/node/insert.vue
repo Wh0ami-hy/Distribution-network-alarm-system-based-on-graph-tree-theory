@@ -6,10 +6,10 @@
     <el-form-item label="故障">
       <el-input v-model="form.fault_info"></el-input>
     </el-form-item>
-    <el-form-item label="纬度">
+    <el-form-item label="经度">
       <el-input v-model="form.latitude"></el-input>
     </el-form-item>
-    <el-form-item label="经度">
+    <el-form-item label="纬度">
       <el-input v-model="form.longitude"></el-input>
     </el-form-item>
     <el-form-item label="电流">

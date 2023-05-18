@@ -6,6 +6,7 @@ import com.hy.service.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -43,12 +44,10 @@ public class NodeServiceImpl implements NodeService {
     }
 
     @Override
-    public void createTree(List<Node> list) {
-        nodeMapper.createTree(list);
+    public List<Node> createTree() {
+        return nodeMapper.createTree();
     }
 
     @Override
-    public void createMap(List<Node> list) {
-        nodeMapper.createMap(list);
-    }
+    public List<Node> createMap() { return nodeMapper.createMap(); }
 }

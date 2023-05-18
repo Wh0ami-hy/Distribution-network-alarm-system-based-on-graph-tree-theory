@@ -4,16 +4,24 @@
 
 <script>
 import AMapLoader from '@amap/amap-jsapi-loader'
+import {createMap} from "@/api/node.js";
+
 	window._AMapSecurityConfig = {
   		securityJsCode: 'ceb74446c9ecaabe6020720a5bf9a26d'
 	}
 export default {
   data() {
     return {
-      map: null
+      map: null,
+      mapData : []
     }
   },
   methods: {
+    loadData(){
+      createMap().then((response)=>{
+        this.mapData = response.data.data;
+      })
+    },
     initMap() {
       AMapLoader.load({
         key: '5625def45684788ad4cd785a05538cdf', // 申请好的Web端开发者Key，首次调用 load 时必填
@@ -27,37 +35,25 @@ export default {
             zoom: 10, //初始化地图级别
             center: [121.473667, 31.230525] //初始化地图中心点位置
           })
-                    // 添加固定点标记
-          var marker1 = new AMap.Marker({
-              content: '网点1',
-              position: new AMap.LngLat(121.473667, 31.230525),   // 经纬度对象，也可以是经纬度构成的一维数组[121.473667, 31.230525]
-              title: '北京'
-          })
 
-          //this.map.add(marker1)
-
-          // 添加圆点标记
-          var circleMarker1 = new AMap.CircleMarker({
-            map:this.map,
-            center: new AMap.LngLat(121.473667, 31.230525),
-            radius: 20,   // 半径大小
-            fillColor: '#22dc19', // 绿色  //#c80539 红色
-          })
-
-          circleMarker1.setMap(this.map)
-          
-        })
-        .catch(e => {
-          console.log(e)
-        })
-    }
-  },
-  mounted() {
-    //DOM初始化完成进行地图初始化
-    this.initMap()
-  }
-}
-</script>
+          // 批量添加圆点标记  绿色：#22dc19 、红色：#c80539
+  const circleMarkers = this.mapData
+  circleMarkers.forEach(marker => { 
+    marker.radius = 20
+    const circleMarker = new AMap.CircleMarker(
+      { 
+      map: this.map,
+      center: new AMap.LngLat(marker.center[0], marker.center[1]), radius: marker.radius, fillColor: marker.fillColor }) 
+      circleMarker.setMap(this.map) }) 
+      }) .catch(e => { console.log(e) }) 
+      } 
+    }, 
+      mounted: function(){ //DOM初始化完成进行地图初始化 
+      this.loadData()
+      this.initMap() 
+      } 
+    } 
+      </script>
 
 <style lang="less" scoped>
 #container {

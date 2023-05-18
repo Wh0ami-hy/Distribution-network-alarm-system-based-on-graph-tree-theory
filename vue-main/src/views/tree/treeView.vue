@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <svg ref="svg" :viewBox="[0, -50, 1000, 2000]"></svg>
@@ -22,33 +23,7 @@ export default {
   data(){
     return{
     // 存储树节点
-     Data: {
-        name: 'A',
-        children: [
-          {
-            name: 'B',
-            children: [
-              {
-                name: 'D'
-              },
-              {
-                name: 'E'
-              }
-            ]
-          },
-          {
-            name: 'C',
-            children: [
-              {
-                name: 'F'
-              },
-              {
-                name: 'G'
-              }
-            ]
-          }
-        ]
-      }
+     Data: {name:'1', children:[{name:'2', children:[{name:'3', children:[]}, null]}, {name:'4', children:[]}]}
     }
   },
   mounted() {

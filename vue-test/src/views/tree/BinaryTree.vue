@@ -11,35 +11,7 @@ export default {
     const ctx = canvas.getContext("2d");
 
     // 定义二叉树的数据结构
-    const tree = {
-      value: 10,
-      left: {
-        value: 5,
-        left: {
-          value: 2,
-          left: null,
-          right: null
-        },
-        right: {
-          value: 7,
-          left: null,
-          right: null
-        }
-      },
-      right: {
-        value: 15,
-        left: {
-          value: 12,
-          left: null,
-          right: null
-        },
-        right: {
-          value: 20,
-          left: null,
-          right: null
-        }
-      }
-    };
+    const tree = {value: 160, left: {value: 53, left: {value: 23, left: {value: 556, left: null, right: null}, right: null}, right: {value: 73, left: null, right: null}}, right: {value: 105, left: {value: 12, left: null, right: null}, right: {value: 20, left: null, right: null}}};
 
     // 定义节点之间的水平距离和垂直距离
     const nodeDistanceX = 100;

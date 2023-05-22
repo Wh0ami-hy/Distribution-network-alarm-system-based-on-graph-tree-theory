@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import mapView from '@/views/map/mapView'
+import BinaryTree from '@/views/tree/BinaryTree.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/view',
-    component: mapView
+    path: '/',
+    component: BinaryTree
   }
 ]
 

@@ -1,13 +1,16 @@
 <template>
   <div>
-    <el-input placeholder="请输入内容" v-model="content" class="input-with-select"
-    style="margin-top: 15px;width:50%;margin-left: 15px;">
-      <el-select v-model="select" slot="prepend" placeholder="请选择">
-        <el-option label="名称" value="node_name"></el-option>
-        <el-option label="故障" value="fault_info"></el-option>
-      </el-select>
-      <el-button slot="append" icon="el-icon-search" @click="handleSearch()"></el-button>
-    </el-input>
+<el-input placeholder="请输入内容" v-model="content" class="input-with-select"
+  style="margin-top: 15px;width:80%;margin-left: 15px;">
+  <el-select v-model="select" slot="prepend" placeholder="请选择">
+    <el-option label="名称" value="node_name"></el-option>
+    <el-option label="故障" value="fault_info"></el-option>
+  </el-select>
+  <el-button slot="append" icon="el-icon-search" @click="handleSearch()"
+    style="background-color: #409EFF;color: #fff;"></el-button>
+  <el-button slot="append" icon="el-icon-download" @click="exportExcel()"
+    style="background-color: #67C23A;color: #fff;"></el-button>
+</el-input>
 
     <el-table
         :data="tableData"
@@ -100,6 +103,7 @@
 
 <script>
 import {selected} from "@/api/node.js";
+import { read, write, utils } from 'xlsx';
 
 export default {
    data() {
@@ -110,6 +114,36 @@ export default {
       }
     },
   methods: {
+    exportExcel(){
+            const header = ['名称', '故障', '经度', '纬度', '电流', '电场', '温度', '湿度', '电池电压', '太阳能电压'];
+      const data = [];
+      for (let row of this.tableData) {
+        data.push([
+          row.node_name,
+          row.fault_info,
+          row.latitude,
+          row.longitude,
+          row.current,
+          row.electric_field,
+          row.temperature,
+          row.humidity,
+          row.battery_voltage,
+          row.solar_voltage
+        ]);
+      }
+      const worksheet = utils.aoa_to_sheet([header, ...data]);
+
+      const workbook = utils.book_new();
+      utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+      const filename = 'data.xlsx';
+      const wbout = write(workbook, { bookType: 'xlsx', type: 'array' });
+      const blob = new Blob([wbout], { type: 'application/octet-stream' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+    },
     handleSearch(){
       var content = this.content;
       var select = this.select;

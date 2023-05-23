@@ -77,17 +77,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/user',
-    component: Layout,
-    children: [
-      {
-        path: 'update',
-        component: () => import('@/views/user/update'),
-        meta: { title: '个人中心', icon: 'form' }
-      }
-    ]
-  },
-  {
     path: '/lay',
     component: Layout,
     meta: {title: "逻辑分布图", icon: 'table'},
@@ -105,12 +94,13 @@ export const constantRoutes = [
     ]
   },
   {
-    path: 'external-link',
+    path: '/user',
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/zh',
-        meta: { title: 'vue-element-admin', icon: 'link' }
+        path: 'update',
+        component: () => import('@/views/user/update'),
+        meta: { title: '个人中心', icon: 'form' }
       }
     ]
   },

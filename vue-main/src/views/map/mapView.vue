@@ -6,9 +6,10 @@
 import AMapLoader from '@amap/amap-jsapi-loader'
 import {createMap} from "@/api/node.js";
 
-	window._AMapSecurityConfig = {
-  		securityJsCode: 'ceb74446c9ecaabe6020720a5bf9a26d'
-	}
+window._AMapSecurityConfig = {
+  securityJsCode: 'ceb74446c9ecaabe6020720a5bf9a26d'
+}
+
 export default {
   data() {
     return {
@@ -17,7 +18,7 @@ export default {
     }
   },
   methods: {
-    loadData(){
+    loadData() {
       createMap().then((response)=>{
         this.mapData = response.data.data;
       })
@@ -37,23 +38,27 @@ export default {
           })
 
           // 批量添加圆点标记  绿色：#22dc19 、红色：#c80539
-  const circleMarkers = this.mapData
-  circleMarkers.forEach(marker => { 
-    marker.radius = 20
-    const circleMarker = new AMap.CircleMarker(
-      { 
-      map: this.map,
-      center: new AMap.LngLat(marker.center[0], marker.center[1]), radius: marker.radius, fillColor: marker.fillColor }) 
-      circleMarker.setMap(this.map) }) 
-      }) .catch(e => { console.log(e) }) 
-      } 
+          const circleMarkers = this.mapData
+          circleMarkers.forEach(marker => { 
+            marker.radius = 20
+            const circleMarker = new AMap.CircleMarker(
+              { 
+              map: this.map,
+              center: new AMap.LngLat(marker.center[0], marker.center[1]), radius: marker.radius, fillColor: marker.fillColor }) 
+              circleMarker.setMap(this.map) 
+          }) 
+        })
+        .catch(e => { console.log(e) }) 
     }, 
-      mounted: function(){ //DOM初始化完成进行地图初始化 
-      this.loadData()
-      this.initMap() 
-      } 
-    } 
-      </script>
+  }, 
+  created() {
+    this.loadData()
+  },
+  mounted() { //DOM初始化完成进行地图初始化 
+    this.initMap() 
+  } 
+} 
+</script>
 
 <style lang="less" scoped>
 #container {
@@ -63,4 +68,3 @@ export default {
   height: 100vmax;
 }
 </style>
-

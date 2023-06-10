@@ -87,6 +87,8 @@ springboot2.7、MySQL5.7、vue2、高德地图API
 
 配置vue2环境以及相关依赖
 
-安装 Jdk1.8、springboot2.7框架以及相关依赖
+安装 Jdk1.8、springboot2.7框架以及相关依赖，安装maven管理依赖包
 
-安装MySQL 5.7，并导入相关数据库
+安装MySQL 5.7，并导入数据库 bishe.sql
+
+运行springboot项目，再运行vue项目，使用测试账号，登录系统即可操作

@@ -6,4 +6,13 @@
     <select id="login" resultType="java.lang.String" parameterType="com.hy.entity.User">
         select password from user where username=#{username};
     </select>
+    <insert id="register" parameterType="com.hy.entity.User">
+        insert into user(username,password) values (#{username}, #{password});
+    </insert>
+    <update id="update" parameterType="com.hy.entity.User">
+        update user set password=#{password},picture=#{picture} where username = #{username};
+    </update>
+    <select id="info" resultType="java.lang.String" parameterType="com.hy.entity.User">
+        select picture from user where username=#{username};
+    </select>
 </mapper>

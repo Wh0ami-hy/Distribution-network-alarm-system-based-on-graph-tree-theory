@@ -32,7 +32,7 @@
     </select>
 
     <select id="createTree" resultType="com.hy.entity.Node">
-        select node_id,fault_info from node
+        select node_id,node_name,fault_info from node
     </select>
 
 

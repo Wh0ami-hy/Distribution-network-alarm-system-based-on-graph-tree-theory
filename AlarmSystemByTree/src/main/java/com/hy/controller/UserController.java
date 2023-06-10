@@ -1,12 +1,13 @@
 package com.hy.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.hy.entity.User;
 import com.hy.service.UserService;
 import com.hy.util.JwtUtils;
 import com.hy.util.Result;
+import com.hy.util.UserCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 
 @CrossOrigin
@@ -23,6 +24,8 @@ public class UserController {
         if (password.equals(user.getPassword())){
             String token = JwtUtils.generateToken(user.getUsername());
             System.out.println("name-->" + user.getUsername() + "\npassword-->" + user.getPassword());
+            // 将用户名存入缓存
+            UserCache.put("username", user.getUsername());
             return Result.ok().data("token",token);
         }else {
             return Result.error();
@@ -31,9 +34,25 @@ public class UserController {
     @GetMapping("/info")
     public Result info(String token){
         String username = JwtUtils.getClaimsByToken(token).getSubject();
-        String url = "https://ts1.cn.mm.bing.net/th/id/R-C.41fea3e6b89ad55df3055ac064de1d55?rik=nOcY%2fPZmgN%2fKsQ&riu=http%3a%2f%2fww1.sinaimg.cn%2flarge%2f005NWMakgy1go4ey87o1wj30b40b4q4e.jpg&ehk=1EscN6fvijWBCmwYVk8FSiLvqoZpt4vzOllJFkIINE8%3d&risl=&pid=ImgRaw&r=0";
+        String url = userService.info(username);
+        System.out.println(url); // "http://127.0.0.1:8888/用户名.jpg";
         return Result.ok().data("name",username).data("avatar",url);
     }
     @PostMapping("/logout")
     public Result logout(){return Result.ok();}
+
+    @PostMapping("/update")
+    public Result update(@RequestBody User user){
+        String picture = "http://127.0.0.1:8888/images/" + UserCache.get("username") + ".jpg";
+        user.setPicture(picture);
+        userService.update(user);
+        System.out.println(user);
+        return Result.ok();
+    }
+
+    @PostMapping("/register")
+        public Result register(@RequestBody User user){
+        userService.register(user);
+        return Result.ok();
+    }
 }

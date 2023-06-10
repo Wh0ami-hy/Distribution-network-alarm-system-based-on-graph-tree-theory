@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form ref="form" :model="form" label-width="120px" style="width:50%;margin-top:20px" >
       <el-form-item label="账号">
-        <el-input v-model="form.username" />
+        <el-input v-model="form.username" readonly />
       </el-form-item>
     <el-form-item label="密码">
         <el-input v-model="form.password"></el-input>
@@ -62,7 +62,6 @@ export default {
       }
     },
     onCancel() {
-      this.form.username = ""
       this.form.password = ""
       this.imageUrl = ""
     },
@@ -72,6 +71,7 @@ export default {
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';
       const isLt2M = file.size / 1024 / 1024 < 5;
+      
 
       if (!isJPG) {
         this.$message.error('上传头像图片只能是 JPG 格式!');

@@ -51,12 +51,13 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import {register} from "@/api/user.js";
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
+      if (value.length < 1) {
         callback(new Error('Please enter the correct user name'))
       } else {
         callback()
@@ -117,7 +118,17 @@ export default {
           return false
         }
       })
+    },
+handleRegister() {
+  register(this.loginForm).then(response => {
+    if (response.code === 20000) {
+          this.$message({
+          message: '注册成功,请登录',
+          type: 'success'
+        });
     }
+  })
+}
   }
 }
 </script>

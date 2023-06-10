@@ -4,14 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.hy.entity.Node;
 import com.hy.service.NodeService;
 import com.hy.util.Result;
+import com.hy.util.TreeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 @RestController
@@ -76,11 +76,9 @@ public class NodeController {
             if (node.getFault_info().equals("正常") || node.getFault_info() == null || node.getFault_info().equals("")){
                 JSONObject json_string1 = JSONObject.parseObject("{ center: [" + node.getLatitude() + "," + node.getLongitude() + "], fillColor: '#22dc19' }");
                 result.add(json_string1);
-                //System.out.println("{ center: [" + node.getLatitude() + "," + node.getLongitude() + "], fillColor: '#22dc19' },");
             }else {
                 JSONObject json_string2 = JSONObject.parseObject("{ center: [" + node.getLatitude() + "," + node.getLongitude() + "], fillColor: '#c80539' }");
                 result.add(json_string2);
-                //System.out.println("{ center: [" + node.getLatitude() + "," + node.getLongitude() + "], fillColor: '#c80539' },");
             }
         }
         System.out.println(result);
@@ -90,16 +88,18 @@ public class NodeController {
     @GetMapping("/createTree")
     public Result createTree(){
         List result = new ArrayList();
+        List list = new ArrayList();
         List<Node> nodes = nodeService.createTree();
         for(Node node : nodes){
             if (node.getFault_info().equals("正常") || node.getFault_info() == null || node.getFault_info().equals("")){
 
             }else {
-                result.add(node.getNode_id());
+                list.add(node.getNode_id());
             }
         }
-        System.out.println(result);
-        return Result.ok().data("data", result);
+        TreeUtils.TreeNode root = TreeUtils.convert(list);
+        JSONObject json_string = JSONObject.parseObject(root.toString());
+        System.out.println(json_string);
+        return Result.ok().data("data", json_string);
     }
-
 }

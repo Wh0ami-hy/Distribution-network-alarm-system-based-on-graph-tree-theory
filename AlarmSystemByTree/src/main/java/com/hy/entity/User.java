@@ -4,14 +4,16 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+    private String picture;
 
     public User() {
     }
 
-    public User(Integer id, String username, String password) {
+    public User(Integer id, String username, String password, String picture) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.picture = picture;
     }
 
     public Integer getId() {
@@ -38,12 +40,21 @@ public class User {
         this.password = password;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", picture='" + picture + '\'' +
                 '}';
     }
 }
